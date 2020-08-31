@@ -1,0 +1,13 @@
+body{
+     /* background: url(https://source.unsplash.com/Oaqk7qqNh_c); */
+     background-color: #cef7f7;
+}
+h1 {
+     color: #444444;
+}
+h5{
+     color: #dd741d;
+     /* text-align: right; */
+     text-transform: uppercase;
+     letter-spacing: 0.1rem;
+}

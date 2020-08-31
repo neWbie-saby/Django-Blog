@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load urlify %}
+
+{% block head_title %}
+{{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
+
+<link href="https://fonts.googleapis.com/css?family=Cabin:500|Literata:700&display=swap" rel="stylesheet">
+
+<style>
+    {% block style %}
+
+    h1 {
+        color: rgb(17, 111, 219);
+        
+    }
+    img {
+        margin: 0 auto;
+    }
+    .container {
+        font-family: 'Cabin', sans-serif;
+    }
+
+    strong {
+        font-family: 'Literata', serif;
+    }
+
+        {% endblock style %}
+</style>
+
+{% block content %}
+
+<div class='col-sm-6 col-sm-offset-3' style="background: white; margin-bottom: 20px;">
+    {% if instance.image %}
+    <img src='{{ instance.image.url }}' class='img-responsive' />
+    {% endif %}
+    <h1><strong>{{ title }}</strong> <small>{% if instance.draft %}<span style='color:#008000;'>Draft</span>{% endif %}
+        </small></h1>
+    <h5>{{ instance.published_date }}</h5>
+    {% if instance.user.get_full_name %}
+    <p>Author: {{ instance.user.get_full_name }}</p>
+    {% endif %}
+    <p>
+        <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like"
+            data-size="large" data-show-faces="true" data-share="true"></div>
+    </p>
+    <hr />
+    {{ instance.text|linebreaks }}</br>
+
+    <!--{{ instance.text|truncatechars:20|urlify }}-->
+
+    <!--<p>
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+Share on Facebook
+</a>-->
+
+    <a href="https://twitter.com/home?status={{ instance.text|urlify }}%20{{ request.build_absolute_uri }}">
+        Share on Twitter
+    </a>
+
+    <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Google+</a>
+
+    <a
+        href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
+        Linkedin
+    </a>
+
+    <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}">Reddit</a>
+
+    <div class='col-sm-12'>
+        <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        var home = document.querySelector(".active");
+        home.classList.remove("active");
+
+    </script>
+
+</div>
+
+{% endblock content %}
